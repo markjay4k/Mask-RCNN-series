@@ -7,3 +7,6 @@ scikit-image
 tensorflow-gpu==1.5
 keras
 jupyter
+opencv-python
+imgaug
+matplotlib
