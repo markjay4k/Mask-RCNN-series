@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from visualize_cv2 import model, display_instances, class_names
+import time
 
 capture = cv2.VideoCapture('videofile.mp4')
 size = (
@@ -14,7 +15,12 @@ while(capture.isOpened()):
     ret, frame = capture.read()
     if ret:
         # add mask to frame
+        start_time = time.time()
         results = model.detect([frame], verbose=0)
+        end_time = time.time()
+        fps = 1/(end_time-start_time)
+        print("FPS: ", fps)
+        
         r = results[0]
         frame = display_instances(
             frame, r['rois'], r['masks'], r['class_ids'], class_names, r['scores']
